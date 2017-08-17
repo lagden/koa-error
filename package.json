@@ -1,0 +1,56 @@
+{
+  "name": "@tadashi/koa-error",
+  "version": "1.0.0",
+  "description": "Middleware for Koa.js",
+  "main": "index.js",
+  "files": [
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "report": "nyc report --reporter=html",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "pretest": "xo",
+    "test": "nyc ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/lagden/koa-error.git"
+  },
+  "keywords": [
+    "koa",
+    "middleware",
+    "error",
+    "handler"
+  ],
+  "author": "Thiago Lagden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lagden/koa-error/issues"
+  },
+  "homepage": "https://github.com/lagden/koa-error#readme",
+  "devDependencies": {
+    "ava": "0.22.0",
+    "coveralls": "2.13.1",
+    "hash-to-port": "1.0.0",
+    "koa": "2.3.0",
+    "nyc": "11.1.0",
+    "supertest": "3.0.0",
+    "xo": "0.18.2"
+  },
+  "xo": {
+    "envs": [
+      "node"
+    ],
+    "semicolon": false,
+    "rules": {
+      "camelcase": [
+        "error",
+        {
+          "properties": "never"
+        }
+      ],
+      "capitalized-comments": 0
+    }
+  }
+}
