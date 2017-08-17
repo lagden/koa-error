@@ -1,6 +1,6 @@
 'use strict'
 
-function error(emit = false) {
+function error(options = {emit: false}) {
 	return async (ctx, next) => {
 		try {
 			await next()
@@ -13,7 +13,7 @@ function error(emit = false) {
 					message: err.message
 				}]
 			}
-			if (emit) {
+			if (options.emit) {
 				ctx.app.emit('error', err)
 			}
 		}
