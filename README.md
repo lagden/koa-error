@@ -38,7 +38,7 @@ const error = require('@tadashi/koa-error')
 
 const koa = new Koa()
 koa
-	.use(error(true))
+	.use(error({emit: true}))
 	.use(ctx => {
 		ctx.throw(401)
 	})
@@ -50,11 +50,11 @@ koa
 
 ## API
 
-#### error(emit = false)
+#### error(options)
 
-Parameter   | Type                 | Required    | Default             | Description
------------ | -------------------- | :---------: | :-----------------: | ------------
-emit        | boolean              | no          | false               | Emit error event
+parameter   | type                 | required    | default             | description
+----------- | -------------------- | ----------- | ------------------- | ------------
+options     | object               | no          | {emit: false}       | Emit error event
 
 
 ## License
