@@ -1,5 +1,7 @@
 # koa-error
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lagden/koa-error.svg)](https://greenkeeper.io/)
+
 [![NPM version][npm-img]][npm]
 [![Build Status][ci-img]][ci]
 [![Coverage Status][coveralls-img]][coveralls]
