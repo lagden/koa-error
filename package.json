@@ -31,7 +31,7 @@
   "homepage": "https://github.com/lagden/koa-error#readme",
   "devDependencies": {
     "ava": "0.22.0",
-    "coveralls": "2.13.1",
+    "coveralls": "2.13.2",
     "hash-to-port": "1.0.0",
     "koa": "2.3.0",
     "nyc": "11.2.1",
