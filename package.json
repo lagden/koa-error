@@ -1,6 +1,6 @@
 {
   "name": "@tadashi/koa-error",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Middleware for Koa.js",
   "main": "index.js",
   "files": [
@@ -33,7 +33,7 @@
     "ava": "0.22.0",
     "coveralls": "2.13.1",
     "hash-to-port": "1.0.0",
-    "koa": "2.3.0",
+    "koa": "2.4.1",
     "nyc": "11.2.0",
     "supertest": "3.0.0",
     "xo": "0.18.2"
