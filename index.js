@@ -8,7 +8,6 @@ function error(options = {emit: false}) {
 			/* istanbul ignore next */
 			ctx.status = err.status || err.statusCode || 500
 			ctx.body = {
-				data: null,
 				errors: [{
 					message: err.message
 				}]

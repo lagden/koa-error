@@ -1,10 +1,9 @@
 'use strict'
 
 import test from 'ava'
-import request from 'supertest'
-import toPort from 'hash-to-port'
 import Koa from 'koa'
 import error from '../.'
+import server from './helpers/server'
 
 test('404', async t => {
 	const koa = new Koa()
@@ -14,7 +13,7 @@ test('404', async t => {
 			ctx.throw(404)
 		})
 
-	const app = request.agent(koa.listen(toPort(Math.random())))
+	const app = server(koa)
 	const res = await app.get('/')
 	const {errors: [{message}]} = res.body
 
@@ -30,7 +29,7 @@ test('500', async t => {
 			ctx.throw(500, 'Boom!')
 		})
 
-	const app = request.agent(koa.listen(toPort(Math.random())))
+	const app = server(koa)
 	const res = await app.get('/')
 	const {errors: [{message}]} = res.body
 
@@ -51,7 +50,7 @@ test.cb('emit', t => {
 				t.end()
 			})
 
-		const app = request.agent(koa.listen(toPort(Math.random())))
+		const app = server(koa)
 		const res = await app.get('/')
 
 		t.is(res.status, 401)

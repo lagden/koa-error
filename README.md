@@ -10,8 +10,6 @@
 [![Greenkeeper badge][greenkeeper-img]][greenkeeper]
 
 
-[greenkeeper-img]: https://badges.greenkeeper.io/lagden/koa-error.svg
-[greenkeeper]:     https://greenkeeper.io/
 [npm-img]:         https://img.shields.io/npm/v/@tadashi/koa-error.svg
 [npm]:             https://www.npmjs.com/package/@tadashi/koa-error
 [ci-img]:          https://travis-ci.org/lagden/koa-error.svg
@@ -22,8 +20,11 @@
 [dep]:             https://david-dm.org/lagden/koa-error
 [devDep-img]:      https://david-dm.org/lagden/koa-error/dev-status.svg
 [devDep]:          https://david-dm.org/lagden/koa-error#info=devDependencies
+
 [xo-img]:          https://img.shields.io/badge/code_style-XO-5ed9c7.svg
 [xo]:              https://github.com/sindresorhus/xo
+[greenkeeper-img]: https://badges.greenkeeper.io/lagden/koa-error.svg
+[greenkeeper]:     https://greenkeeper.io/
 
 
 A [Koa](https://github.com/koajs/koa) `error handler` middleware
@@ -59,7 +60,7 @@ koa
 
 parameter   | type                 | required    | default             | description
 ----------- | -------------------- | ----------- | ------------------- | ------------
-options     | object               | no          | {emit: false}       | Emit error event
+options     | object               | no          | {emit: false}       | Dispatch error
 
 
 ## License
