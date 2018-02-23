@@ -41,7 +41,7 @@ test.cb('emit', t => {
 	(async () => {
 		const koa = new Koa()
 		koa
-			.use(error({emit: true}))
+			.use(error(true))
 			.use(ctx => {
 				ctx.throw(401)
 			})
