@@ -2,7 +2,7 @@
 
 import test from 'ava'
 import Koa from 'koa'
-import error from '../.'
+import error from '..'
 import server from './helpers/server'
 
 test('404', async t => {
@@ -55,4 +55,22 @@ test.cb('emit', t => {
 
 		t.is(res.status, 401)
 	})()
+})
+
+test('environments', async t => {
+	process.env.NODE_ENV = 'production'
+	const koa = new Koa()
+	koa
+		.use(error())
+		.use(() => {
+			throw new Error('Something is wrong')
+		})
+
+	const app = server(koa)
+	const res = await app.get('/')
+	const {errors: [{message, stack}]} = res.body
+
+	t.is(res.status, 500)
+	t.is(message, 'Something is wrong')
+	t.is(stack, 'only for development or test environments')
 })
