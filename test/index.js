@@ -9,7 +9,7 @@ test('404', async t => {
 	const koa = new Koa()
 	koa
 		.use(error())
-		.use(async ctx => {
+		.use(ctx => {
 			ctx.throw(404)
 		})
 
@@ -57,8 +57,7 @@ test.cb('emit', t => {
 	})()
 })
 
-test('environments', async t => {
-	process.env.NODE_ENV = 'production'
+test('throw', async t => {
 	const koa = new Koa()
 	koa
 		.use(error())
@@ -68,9 +67,8 @@ test('environments', async t => {
 
 	const app = server(koa)
 	const res = await app.get('/')
-	const {errors: [{message, stack}]} = res.body
+	const {errors: [{message}]} = res.body
 
 	t.is(res.status, 500)
 	t.is(message, 'Something is wrong')
-	t.is(stack, 'only for development or test environments')
 })

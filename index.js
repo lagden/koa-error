@@ -1,24 +1,22 @@
 'use strict'
 
-function error(...args) {
-	const [emit = false] = args
+function errorHandling(emit = false) {
 	return async (ctx, next) => {
 		try {
 			await next()
-		} catch (err) {
-			const stack = /development|dev|test/.test(process.env.NODE_ENV) ? err.stack : 'only for development or test environments'
-			ctx.status = err.status || 500
+		} catch (error) {
+			ctx.status = error.status || 500
 			ctx.body = {
 				errors: [{
-					message: err.message,
-					stack
+					message: error.message
 				}]
 			}
+
 			if (emit) {
-				ctx.app.emit('error', err)
+				ctx.app.emit('error', error)
 			}
 		}
 	}
 }
 
-module.exports = error
+module.exports = errorHandling
