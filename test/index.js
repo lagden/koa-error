@@ -4,6 +4,7 @@ import test from 'ava'
 import Koa from 'koa'
 import error from '..'
 import server from './helpers/server'
+import CustomError from './helpers/custom-error'
 
 test('404', async t => {
 	const koa = new Koa()
@@ -35,6 +36,22 @@ test('500', async t => {
 
 	t.is(res.status, 500)
 	t.is(message, 'Boom!')
+})
+
+test('custom error', async t => {
+	const koa = new Koa()
+	koa
+		.use(error())
+		.use(() => {
+			throw new CustomError('xiiii', {statusCode: 422, statusMessage: 'custom error'})
+		})
+
+	const app = server(koa)
+	const res = await app.get('/')
+	const {errors: [{message}]} = res.body
+
+	t.is(res.status, 422)
+	t.is(message, 'custom error')
 })
 
 test.cb('emit', t => {

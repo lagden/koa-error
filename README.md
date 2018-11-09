@@ -60,7 +60,7 @@ koa
 
 parameter   | type                 | required    | default             | description
 ----------- | -------------------- | ----------- | ------------------- | ------------
-emit        | boolean              | no          | false               | Dispatch error
+emit        | boolean              | no          | false               | Emit error event
 
 
 ## License
