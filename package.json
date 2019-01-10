@@ -1,6 +1,6 @@
 {
   "name": "@tadashi/koa-error",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "description": "Middleware for Koa.js",
   "main": "index.js",
   "files": [
@@ -44,9 +44,9 @@
     }
   },
   "devDependencies": {
-    "ava": "0.25.0",
+    "ava": "1.0.1",
     "hash-to-port": "1.0.0",
-    "koa": "2.6.1",
+    "koa": "2.6.2",
     "supertest": "3.3.0",
     "xo": "0.23.0"
   }

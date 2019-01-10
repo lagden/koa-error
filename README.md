@@ -48,7 +48,7 @@ koa
 	.use(ctx => {
 		ctx.throw(401)
 	})
-	.on('error', err => {
+	.on('error', [err] => {
 		console.log(err.message) // Unauthorized
 	})
 ```
@@ -61,6 +61,10 @@ koa
 parameter   | type                 | required    | default             | description
 ----------- | -------------------- | ----------- | ------------------- | ------------
 emit        | boolean              | no          | false               | Emit error event
+
+
+**Warning!**  
+The error is always a collection (array)
 
 
 ## License

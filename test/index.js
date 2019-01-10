@@ -63,7 +63,7 @@ test.cb('emit', t => {
 				ctx.throw(401)
 			})
 			.on('error', err => {
-				t.is(err.message, 'Unauthorized')
+				t.is(err[0].message, 'Unauthorized')
 				t.end()
 			})
 
