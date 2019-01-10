@@ -1,3 +1,4 @@
+/* eslint prefer-promise-reject-errors:0 */
 'use strict'
 
 import test from 'ava'
@@ -88,4 +89,13 @@ test('throw', async t => {
 
 	t.is(res.status, 500)
 	t.is(message, 'Something is wrong')
+})
+
+test('collection', async t => {
+	const ctx = {}
+	const next = () => new Promise((resolve, reject) => {
+		reject([new Error('foo'), new Error('bar')])
+	})
+	await error(false)(ctx, next)
+	t.is(ctx.body.errors.length, 2)
 })
