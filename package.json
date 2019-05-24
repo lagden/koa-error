@@ -1,16 +1,19 @@
 {
   "name": "@tadashi/koa-error",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "Middleware for Koa.js",
   "main": "index.js",
   "files": [
     "LICENSE",
     "README.md"
   ],
+  "engines": {
+    "node": ">=8"
+  },
   "scripts": {
     "report": "nyc report --reporter=text-lcov | coveralls",
     "pretest": "xo",
-    "test": "ava"
+    "test": "ava -v"
   },
   "repository": {
     "type": "git",
@@ -40,14 +43,15 @@
           "properties": "never"
         }
       ],
-      "capitalized-comments": 0
+      "capitalized-comments": 0,
+      "padding-line-between-statements": 0
     }
   },
   "devDependencies": {
-    "ava": "1.0.1",
+    "ava": "1.4.1",
     "hash-to-port": "1.0.0",
-    "koa": "2.6.2",
-    "supertest": "3.3.0",
-    "xo": "0.23.0"
+    "koa": "2.7.0",
+    "supertest": "4.0.2",
+    "xo": "0.24.0"
   }
 }

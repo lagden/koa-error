@@ -1,6 +1,13 @@
 'use strict'
 
-function _defineProperty(obj, name, value) {
+function _flat(arr) {
+	if (!Array.prototype.flat) {
+		return [].concat(...arr)
+	}
+	return arr.flat()
+}
+
+function _prop(obj, name, value) {
 	Object.defineProperty(obj, name, {
 		enumerable: true,
 		configurable: true,
@@ -9,23 +16,18 @@ function _defineProperty(obj, name, value) {
 	})
 }
 
-function _dpError(error) {
-	_defineProperty(error, 'status', error.statusCode || error.status || 500)
-	_defineProperty(error, 'message', error.statusMessage || error.message)
+function _props(error) {
+	_prop(error, 'status', error.statusCode || error.status || 500)
+	_prop(error, 'message', error.statusMessage || error.message || 'Internal Server Error')
 }
 
-function _error(_err) {
-	const errors = []
-	if (Array.isArray(_err)) {
-		for (const error of _err) {
-			_dpError(error)
-			errors.push(error)
-		}
-	} else {
-		_dpError(_err)
-		errors.push(_err)
+function _collection(...args) {
+	const errors = new Set()
+	for (const error of _flat(args)) {
+		_props(error)
+		errors.add(error)
 	}
-	return errors
+	return [...errors]
 }
 
 function errorHandling(emit = false) {
@@ -33,10 +35,12 @@ function errorHandling(emit = false) {
 		try {
 			await next()
 		} catch (error) {
-			const errors = _error(error)
+			const errors = _collection(error)
 			const [{status}] = errors
 			ctx.status = status
-			ctx.body = {errors}
+			ctx.body = {
+				errors
+			}
 			if (emit) {
 				ctx.app.emit('error', errors)
 			}
