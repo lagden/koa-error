@@ -48,7 +48,7 @@
     }
   },
   "devDependencies": {
-    "ava": "1.4.1",
+    "ava": "2.0.0",
     "hash-to-port": "1.0.0",
     "koa": "2.7.0",
     "supertest": "4.0.2",
