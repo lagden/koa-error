@@ -32,12 +32,12 @@
   },
   "homepage": "https://github.com/lagden/koa-error#readme",
   "ava": {
-		"files": [
-			"test/**/*"
-		],
-		"helpers": [
-			"test/helpers/**/*"
-		]
+    "files": [
+      "test/**/*"
+    ],
+    "helpers": [
+      "test/helpers/**/*"
+    ]
   },
   "xo": {
     "envs": [
