@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "ava": "2.1.0",
-    "hash-to-port": "1.0.0",
+    "hash-to-port": "1.1.0",
     "koa": "2.7.0",
     "supertest": "4.0.2",
     "xo": "0.24.0"
