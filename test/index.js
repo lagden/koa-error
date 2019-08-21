@@ -3,9 +3,9 @@
 
 import test from 'ava'
 import Koa from 'koa'
-import error from '..'
 import server from './helpers/server'
 import CustomError from './helpers/custom-error'
+import error from '..'
 
 test('404', async t => {
 	const koa = new Koa()
