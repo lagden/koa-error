@@ -1,8 +1,8 @@
 /* eslint prefer-promise-reject-errors:0 */
 'use strict'
 
-import test from 'ava'
 import Koa from 'koa'
+import test from 'ava'
 import server from './helpers/server'
 import CustomError from './helpers/custom-error'
 import error from '..'
