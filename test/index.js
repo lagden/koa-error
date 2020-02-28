@@ -1,11 +1,10 @@
 /* eslint prefer-promise-reject-errors:0 */
 'use strict'
 
-import Koa from 'koa'
-import test from 'ava'
-import server from './helpers/server'
-import CustomError from './helpers/custom-error'
-import error from '..'
+const Koa = require('koa')
+const test = require('ava')
+const server = require('./helpers/server')
+const error = require('..')
 
 test('404', async t => {
 	const koa = new Koa()
@@ -44,7 +43,10 @@ test('custom error', async t => {
 	koa
 		.use(error())
 		.use(() => {
-			throw new CustomError('xiiii', {statusCode: 422, statusMessage: 'custom error'})
+			const _error = new Error('xiiii')
+			_error.statusCode = 422
+			_error.statusMessage = 'custom error'
+			throw _error
 		})
 
 	const app = server(koa)

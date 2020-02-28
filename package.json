@@ -8,7 +8,7 @@
     "README.md"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "report": "nyc report --reporter=text-lcov | coveralls",
@@ -32,8 +32,9 @@
   },
   "homepage": "https://github.com/lagden/koa-error#readme",
   "ava": {
-    "helpers": [
-      "test/helpers/**/*"
+    "files": [
+      "test/**/*",
+      "!test/helpers/**/*"
     ]
   },
   "xo": {
@@ -56,9 +57,9 @@
     "koa": ">=2"
   },
   "devDependencies": {
-    "ava": "2.3.0",
+    "ava": "3.4.0",
     "hash-to-port": "1.1.0",
     "supertest": "4.0.2",
-    "xo": "0.24.0"
+    "xo": "0.27.2"
   }
 }
