@@ -50,16 +50,18 @@
         }
       ],
       "capitalized-comments": 0,
-      "padding-line-between-statements": 0
+      "padding-line-between-statements": 0,
+      "unicorn/prevent-abbreviations": 0
     }
   },
   "peerDependencies": {
     "koa": ">=2"
   },
   "devDependencies": {
-    "ava": "3.4.0",
+    "ava": "3.7.0",
     "hash-to-port": "1.1.0",
+    "koa": "2.11.0",
     "supertest": "4.0.2",
-    "xo": "0.27.2"
+    "xo": "0.29.1"
   }
 }
