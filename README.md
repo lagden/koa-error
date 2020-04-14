@@ -23,8 +23,8 @@
 
 [xo-img]:          https://img.shields.io/badge/code_style-XO-5ed9c7.svg
 [xo]:              https://github.com/sindresorhus/xo
-[greenkeeper-img]: https://badges.greenkeeper.io/lagden/koa-error.svg
-[greenkeeper]:     https://greenkeeper.io/
+[greenkeeper-img]: https://snyk.io/test/github/lagden/koa-error/badge.svg
+[greenkeeper]:     https://snyk.io/test/github/lagden/koa-error
 
 
 A [Koa](https://github.com/koajs/koa) `error handler` middleware
