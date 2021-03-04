@@ -9,8 +9,8 @@
 
 [npm-img]:         https://img.shields.io/npm/v/@tadashi/koa-error.svg
 [npm]:             https://www.npmjs.com/package/@tadashi/koa-error
-[ci-img]:          https://travis-ci.org/lagden/koa-error.svg
-[ci]:              https://travis-ci.org/lagden/koa-error
+[ci-img]:          https://github.com/lagden/koa-error/workflows/Koa%20Base%20CI/badge.svg
+[ci]:              https://github.com/lagden/koa-error/actions?query=workflow%3A%22Koa+Base+CI%22
 [coveralls-img]:   https://coveralls.io/repos/github/lagden/koa-error/badge.svg?branch=master
 [coveralls]:       https://coveralls.io/github/lagden/koa-error?branch=master
 
