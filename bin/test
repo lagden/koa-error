@@ -1,33 +1,30 @@
-#!/bin/bash
+#!/bin/sh
 
-DIR="$( cd -P "$( dirname "$0" )" && pwd )"
-cd $DIR
-cd ..
+DIR="$(cd -P "$(dirname "$0")" && pwd)"
 
-CURR_FOLDER=`pwd`
-BUILD=""
-SERVICE="sut"
-
-abort() {
-	printf "\n  \033[31mError: $@\033[0m\n\n" && exit 1
-}
-
-ok() {
-	printf "\n  \033[32mOk: $@\033[0m\n\n"
-}
+# Import functions
+. $DIR/_fn
 
 usage() {
 	cat <<-EOF
 
-  Usage: $0 [-b]
+  Usage: $0 [options]
 
   Options:
-    -b   Build image
-    -h   Show usage
+    -b            Build image
+    -s <service>  Docker compose service name
+    -h            Show usage
 
 EOF
 exit 0
 }
+
+# Go to current directory
+CURR_FOLDER="$(pwd)"
+cd $CURR_FOLDER
+
+BUILD=""
+SERVICE="sut"
 
 _cleanup() {
 	docker-compose \
@@ -38,10 +35,11 @@ _cleanup() {
 
 trap '_cleanup; abort "Tests failed for unexpected reasons"' HUP INT QUIT PIPE TERM SIGINT SIGTERM
 
-while getopts ":b" o
+while getopts ":bs:" o
 do
 	case ${o} in
 		b) BUILD="--build" ;;
+		s) SERVICE=$OPTARG ;;
 		*) usage ;;
 	esac
 done
@@ -53,6 +51,7 @@ docker-compose \
 	--abort-on-container-exit \
 	--exit-code-from $SERVICE \
 	--remove-orphans \
+	--renew-anon-volumes \
 	$BUILD \
 	$SERVICE
 

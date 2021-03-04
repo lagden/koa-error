@@ -4,13 +4,11 @@ services:
     build:
       context: ./
       args:
-        NODE_ENV: test
+        NODE_ENV: development
     command: >
       /bin/ash -c "
-       npm i -S koa;
-       npm test
+        npm test
       "
     volumes:
-      - ./test:/home/node/base/test
-    environment:
-      - NODE_ENV=test
+      - .:/home/node/app
+      - /home/node/app/node_modules

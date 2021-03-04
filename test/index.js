@@ -1,9 +1,9 @@
-/* eslint prefer-promise-reject-errors:0 */
+/* eslint prefer-promise-reject-errors: 0 */
 'use strict'
 
 const Koa = require('koa')
 const test = require('ava')
-const server = require('./helpers/server')
+const server = require('./helper/server')
 const error = require('..')
 
 test('404', async t => {
@@ -16,9 +16,10 @@ test('404', async t => {
 
 	const app = server(koa)
 	const res = await app.get('/')
-	const {errors: [{message}]} = res.body
+	const {code, message} = res.body
 
 	t.is(res.status, 404)
+	t.is(code, 404)
 	t.is(message, 'Not Found')
 })
 
@@ -32,9 +33,10 @@ test('500', async t => {
 
 	const app = server(koa)
 	const res = await app.get('/')
-	const {errors: [{message}]} = res.body
+	const {code, message} = res.body
 
 	t.is(res.status, 500)
+	t.is(code, 500)
 	t.is(message, 'Boom!')
 })
 
@@ -43,17 +45,19 @@ test('custom error', async t => {
 	koa
 		.use(error())
 		.use(() => {
-			const _error = new Error('xiiii')
-			_error.statusCode = 422
-			_error.statusMessage = 'custom error'
-			throw _error
+			const error = new Error('xiiii')
+			error.statusCode = 422
+			error.statusMessage = 'custom error'
+			error.expose = true
+			throw error
 		})
 
 	const app = server(koa)
 	const res = await app.get('/')
-	const {errors: [{message}]} = res.body
+	const {code, message} = res.body
 
 	t.is(res.status, 422)
+	t.is(code, 422)
 	t.is(message, 'custom error')
 })
 
@@ -65,8 +69,8 @@ test.cb('emit', t => {
 			.use(ctx => {
 				ctx.throw(401)
 			})
-			.on('error', err => {
-				t.is(err[0].message, 'Unauthorized')
+			.on('error', error => {
+				t.is(error.message, 'Unauthorized')
 				t.end()
 			})
 
@@ -87,9 +91,10 @@ test('throw', async t => {
 
 	const app = server(koa)
 	const res = await app.get('/')
-	const {errors: [{message}]} = res.body
+	const {code, message} = res.body
 
 	t.is(res.status, 500)
+	t.is(code, 500)
 	t.is(message, 'Something is wrong')
 })
 

@@ -1,20 +1,18 @@
-FROM node:10.16-alpine
-LABEL maintainer="test_docker@lagden.in"
+# APP Prod, Staging e Test
+FROM node:14.15-alpine3.13
+LABEL maintainer="lagden@gmail.com"
 
-ARG PORT=3000
-ARG NODE_ENV=development
-ARG HOME_DIR=/home/node
+ARG NODE_ENV="production"
+ARG BASE="/home/node"
 
 ENV NODE_ENV=$NODE_ENV
-ENV PORT=$PORT
-ENV HOME_DIR=$HOME_DIR
-ENV BASE=$HOME_DIR/base
-
-USER node
-WORKDIR $HOME_DIR
-
-RUN mkdir -p $BASE
-COPY . $BASE
+ENV BASE=$BASE
+ENV BASE_APP=$BASE/app
 
 WORKDIR $BASE
+ADD --chown=node:node . $BASE_APP
+
+WORKDIR $BASE_APP
 RUN npm ci --ignore-scripts
+
+USER node
