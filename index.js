@@ -1,6 +1,6 @@
 'use strict'
 
-function errorHandling(emit = false) {
+function errorHandling(emit) {
 	return async (ctx, next) => {
 		try {
 			await next()
@@ -11,7 +11,8 @@ function errorHandling(emit = false) {
 			}
 			ctx.status = error?.response?.statusCode ?? error?.statusCode ?? error?.status ?? 500
 			ctx.statusMessage = error?.response?.statusMessage ?? error?.statusMessage ?? error?.message ?? 'Internal Server Error'
-			ctx.body = multiple ?? error?.graphql ?? error?.response?.body ?? error?.body ?? {code: ctx.status, message: ctx.statusMessage}
+			ctx.statusText = ctx.statusMessage
+			ctx.body = error?.graphql ?? error?.response?.body ?? error?.body ?? multiple ?? {code: ctx.status, message: ctx.statusMessage}
 			if (emit) {
 				ctx.app.emit('error', error)
 			}

@@ -6,6 +6,21 @@ const test = require('ava')
 const server = require('./helper/server')
 const error = require('..')
 
+test('200', async t => {
+	const koa = new Koa()
+	koa
+		.use(error())
+		.use(ctx => {
+			ctx.body = {ok: true}
+		})
+
+	const app = server(koa)
+	const res = await app.get('/')
+
+	t.is(res.status, 200)
+	t.snapshot(res.body)
+})
+
 test('404', async t => {
 	const koa = new Koa()
 	koa
@@ -16,11 +31,9 @@ test('404', async t => {
 
 	const app = server(koa)
 	const res = await app.get('/')
-	const {code, message} = res.body
 
 	t.is(res.status, 404)
-	t.is(code, 404)
-	t.is(message, 'Not Found')
+	t.snapshot(res.body)
 })
 
 test('500', async t => {
@@ -61,24 +74,18 @@ test('custom error', async t => {
 	t.is(message, 'custom error')
 })
 
-test.cb('emit', t => {
-	(async () => {
-		const koa = new Koa()
-		koa
-			.use(error(true))
-			.use(ctx => {
-				ctx.throw(401)
-			})
-			.on('error', error => {
-				t.is(error.message, 'Unauthorized')
-				t.end()
-			})
+test('emit', async t => {
+	const koa = new Koa()
+	koa
+		.use(error(true))
+		.use(ctx => {
+			ctx.throw(401)
+		})
 
-		const app = server(koa)
-		const res = await app.get('/')
+	const app = server(koa)
+	const res = await app.get('/')
 
-		t.is(res.status, 401)
-	})()
+	t.is(res.status, 401)
 })
 
 test('throw', async t => {
@@ -104,5 +111,7 @@ test('collection', async t => {
 		reject([new Error('foo'), new Error('bar')])
 	})
 	await error(false)(ctx, next)
-	t.is(ctx.body.errors.length, 2)
+	t.snapshot(ctx.status)
+	t.snapshot(ctx.statusText)
+	t.snapshot(ctx.body)
 })
