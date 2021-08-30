@@ -1,10 +1,7 @@
-/* eslint prefer-promise-reject-errors: 0 */
-'use strict'
-
-const Koa = require('koa')
-const test = require('ava')
-const server = require('./helper/server')
-const error = require('..')
+import Koa from 'koa'
+import test from 'ava'
+import server from './helper/server.js'
+import error from '../src/error.js'
 
 test('200', async t => {
 	const koa = new Koa()

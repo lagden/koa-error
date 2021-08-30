@@ -4,18 +4,13 @@
 [![Build Status][ci-img]][ci]
 [![Coverage Status][coveralls-img]][coveralls]
 
-[![XO code style][xo-img]][xo]
-
 
 [npm-img]:         https://img.shields.io/npm/v/@tadashi/koa-error.svg
 [npm]:             https://www.npmjs.com/package/@tadashi/koa-error
-[ci-img]:          https://github.com/lagden/koa-error/workflows/Koa%20Base%20CI/badge.svg
-[ci]:              https://github.com/lagden/koa-error/actions?query=workflow%3A%22Koa+Base+CI%22
+[ci-img]:          https://github.com/lagden/koa-error/actions/workflows/nodejs.yml/badge.svg
+[ci]:              https://github.com/lagden/koa-error/actions/workflows/nodejs.yml
 [coveralls-img]:   https://coveralls.io/repos/github/lagden/koa-error/badge.svg?branch=master
 [coveralls]:       https://coveralls.io/github/lagden/koa-error?branch=master
-
-[xo-img]:          https://img.shields.io/badge/code_style-XO-5ed9c7.svg
-[xo]:              https://github.com/sindresorhus/xo
 
 
 A [Koa](https://github.com/koajs/koa) `error handler` middleware
@@ -30,8 +25,8 @@ $ npm i -S @tadashi/koa-error
 ## Usage
 
 ```js
-const Koa = require('koa')
-const error = require('@tadashi/koa-error')
+import Koa from 'koa'
+import error from '@tadashi/koa-error'
 
 const koa = new Koa()
 koa

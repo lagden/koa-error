@@ -1,5 +1,3 @@
-'use strict'
-
 function errorHandling(emit) {
 	return async (ctx, next) => {
 		try {
@@ -20,4 +18,4 @@ function errorHandling(emit) {
 	}
 }
 
-module.exports = errorHandling
+export default errorHandling
