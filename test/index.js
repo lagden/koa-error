@@ -112,3 +112,24 @@ test('collection', async t => {
 	t.snapshot(ctx.statusText)
 	t.snapshot(ctx.body)
 })
+
+test('more data', async t => {
+	const koa = new Koa()
+	koa
+		.use(error(true))
+		.use(ctx => {
+			ctx.throw(400, undefined, {
+				body: {
+					code: 400,
+					message: 'Bad!!',
+					id: 123,
+				},
+			})
+		})
+
+	const app = server(koa)
+	const res = await app.get('/')
+
+	t.is(res.status, 400)
+	t.snapshot(res.body)
+})
