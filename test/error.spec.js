@@ -5,11 +5,9 @@ import error from '../src/error.js'
 
 test('200', async t => {
 	const koa = new Koa()
-	koa
-		.use(error())
-		.use(ctx => {
-			ctx.body = {ok: true}
-		})
+	koa.use(error()).use(ctx => {
+		ctx.body = {ok: true}
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')
@@ -20,11 +18,9 @@ test('200', async t => {
 
 test('404', async t => {
 	const koa = new Koa()
-	koa
-		.use(error())
-		.use(ctx => {
-			ctx.throw(404)
-		})
+	koa.use(error()).use(ctx => {
+		ctx.throw(404)
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')
@@ -35,11 +31,9 @@ test('404', async t => {
 
 test('500', async t => {
 	const koa = new Koa()
-	koa
-		.use(error())
-		.use(ctx => {
-			ctx.throw(500, 'Boom!')
-		})
+	koa.use(error()).use(ctx => {
+		ctx.throw(500, 'Boom!')
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')
@@ -52,15 +46,13 @@ test('500', async t => {
 
 test('custom error', async t => {
 	const koa = new Koa()
-	koa
-		.use(error())
-		.use(() => {
-			const error = new Error('xiiii')
-			error.statusCode = 422
-			error.statusMessage = 'custom error'
-			error.expose = true
-			throw error
-		})
+	koa.use(error()).use(() => {
+		const error = new Error('xiiii')
+		error.statusCode = 422
+		error.statusMessage = 'custom error'
+		error.expose = true
+		throw error
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')
@@ -73,11 +65,9 @@ test('custom error', async t => {
 
 test('emit', async t => {
 	const koa = new Koa()
-	koa
-		.use(error(true))
-		.use(ctx => {
-			ctx.throw(401)
-		})
+	koa.use(error(true)).use(ctx => {
+		ctx.throw(401)
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')
@@ -87,11 +77,9 @@ test('emit', async t => {
 
 test('throw', async t => {
 	const koa = new Koa()
-	koa
-		.use(error())
-		.use(() => {
-			throw new Error('Something is wrong')
-		})
+	koa.use(error()).use(() => {
+		throw new Error('Something is wrong')
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')
@@ -104,9 +92,10 @@ test('throw', async t => {
 
 test('collection', async t => {
 	const ctx = {}
-	const next = () => new Promise((resolve, reject) => {
-		reject([new Error('foo'), new Error('bar')])
-	})
+	const next = () =>
+		new Promise((resolve, reject) => {
+			reject([new Error('foo'), new Error('bar')])
+		})
 	await error(false)(ctx, next)
 	t.snapshot(ctx.status)
 	t.snapshot(ctx.statusText)
@@ -115,17 +104,15 @@ test('collection', async t => {
 
 test('more data', async t => {
 	const koa = new Koa()
-	koa
-		.use(error(true))
-		.use(ctx => {
-			ctx.throw(400, undefined, {
-				body: {
-					code: 400,
-					message: 'Bad!!',
-					id: 123,
-				},
-			})
+	koa.use(error(true)).use(ctx => {
+		ctx.throw(400, undefined, {
+			body: {
+				code: 400,
+				message: 'Bad!!',
+				id: 123,
+			},
 		})
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')
@@ -134,23 +121,20 @@ test('more data', async t => {
 	t.snapshot(res.body)
 })
 
-
 test('response', async t => {
 	const koa = new Koa()
-	koa
-		.use(error())
-		.use(() => {
-			const error = new Error('xiiii')
-			error.response = {
-				statusCode: 422,
-				statusMessage: 'custom error',
-				body: {
-					fail: true,
-				},
-			}
-			error.expose = true
-			throw error
-		})
+	koa.use(error()).use(() => {
+		const error = new Error('xiiii')
+		error.response = {
+			statusCode: 422,
+			statusMessage: 'custom error',
+			body: {
+				fail: true,
+			},
+		}
+		error.expose = true
+		throw error
+	})
 
 	const app = server(koa)
 	const res = await app.get('/')

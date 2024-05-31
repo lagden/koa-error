@@ -6,6 +6,7 @@ function errorHandling(emit) {
 			ctx.status = error?.response?.statusCode ?? error?.statusCode ?? error?.status ?? 500
 			ctx.statusMessage = error?.response?.statusMessage ?? error?.statusMessage ?? error?.message ?? 'Internal Server Error'
 			ctx.statusText = error?.response?.statusText ?? error?.statusText ?? ctx.statusMessage
+			// prettier-ignore
 			ctx.body = error?.response?.body ?? error?.body ?? {
 				code: ctx.status,
 				message: ctx.statusMessage,

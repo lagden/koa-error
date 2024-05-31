@@ -13,7 +13,9 @@
   },
   "scripts": {
     "eslint": "eslint .",
-    "pretest": "npm run eslint",
+    "check": "prettier --check .",
+    "format": "prettier --write .",
+    "pretest": "run-s check eslint",
     "test": "c8 --reporter=text --reporter=text-summary --reporter=lcov ava --tap"
   },
   "repository": {
@@ -44,6 +46,8 @@
     "eslint": "9.3.0",
     "eslint-plugin-unicorn": "53.0.0",
     "globals": "15.3.0",
+    "npm-run-all": "4.1.5",
+    "prettier": "3.2.5",
     "supertest": "7.0.0",
     "hash-to-port": "1.2.0",
     "koa": "2.15.3"
