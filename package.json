@@ -47,5 +47,10 @@
     "supertest": "7.0.0",
     "hash-to-port": "1.2.0",
     "koa": "2.15.3"
+  },
+  "ava": {
+    "require": [
+      "./test/helper/force-exit.mjs"
+    ]
   }
 }
