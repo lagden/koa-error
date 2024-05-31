@@ -133,3 +133,28 @@ test('more data', async t => {
 	t.is(res.status, 400)
 	t.snapshot(res.body)
 })
+
+
+test('response', async t => {
+	const koa = new Koa()
+	koa
+		.use(error())
+		.use(() => {
+			const error = new Error('xiiii')
+			error.response = {
+				statusCode: 422,
+				statusMessage: 'custom error',
+				body: {
+					fail: true,
+				},
+			}
+			error.expose = true
+			throw error
+		})
+
+	const app = server(koa)
+	const res = await app.get('/')
+
+	t.is(res.status, 422)
+	t.snapshot(res.body)
+})
